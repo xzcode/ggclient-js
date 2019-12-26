@@ -1,0 +1,28 @@
+{
+  "name": "ggclient-js",
+  "version": "0.1.0",
+  "description": "",
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc",
+    "pub": "tsc && npm pack && npm publish"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xzcode/ggclient-js.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/xzcode/ggclient-js/issues"
+  },
+  "publishConfig": {
+    "registry": "http://common.host:8081/repository/npm-hosted"
+  },
+  "homepage": "https://github.com/xzcode/ggclient-js#readme",
+  "devDependencies": {
+  }
+}
