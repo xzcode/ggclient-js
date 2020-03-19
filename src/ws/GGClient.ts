@@ -1,5 +1,5 @@
-import { WebSocketProvider } from "./ws/WebSocketProvider";
-import { ISerializer } from "./serializer/ISerializer";
+import { WebSocketProvider } from "./WebSocketProvider";
+import { ISerializer } from "../serializer/ISerializer";
 
 
 
