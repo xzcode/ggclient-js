@@ -1,5 +1,5 @@
-import { WebSocketProvider } from "./WebSocketProvider";
-import { ISerializer } from "../serializer/ISerializer";
+import { WebSocketProvider } from "./provider/WebSocketProvider";
+import { ISerializer } from "./serializer/ISerializer";
 
 
 
@@ -8,8 +8,8 @@ import { ISerializer } from "../serializer/ISerializer";
  */
 export class GGClient {
 
-    serverUrl:string = 'ws://localhost/websocket';
-    defaultParams:Object = {};
+    serverUrl: string = 'ws://localhost/websocket';
+    defaultParams: Object = {};
     serializer: ISerializer;
     ws: WebSocket | undefined;
 
@@ -19,13 +19,13 @@ export class GGClient {
      * @param webSocketProvider WebSocketProvider
      * @param ISerializer 序列化器
      */
-    constructor(serverUrl:string, webSocketProvider: WebSocketProvider, serializer: ISerializer) 
+    constructor(serverUrl: string, webSocketProvider: WebSocketProvider, serializer: ISerializer)
 
     /**
      * 基础构造器
      * @param args 参数素组
      */
-    constructor(...args:any) {
+    constructor(...args: any) {
         this.serverUrl = args[0];
         this.serializer = args[1]
     }
@@ -35,6 +35,6 @@ export class GGClient {
         this.ws.binaryType = "arraybuffer";
     }
 
-    
+
 
 }

@@ -41,8 +41,6 @@ export class GGHttpClient implements IGGHttpClient {
         xhrProvider && (this.xhrProvider = xhrProvider);
     }
 
-    request(method: string, url: string, options?: any): GGHttpOperation;
-
     request(method: string, url: string, options?: any): GGHttpOperation {
         let oper: GGHttpOperation = new GGHttpOperation();
         oper.method = method;
@@ -64,22 +62,22 @@ export class GGHttpClient implements IGGHttpClient {
                 this.responseHandler.handle(oper);
             }
         };
-
+        //如果存在默认url参数提供者，就把默认参数拼接到url上
         if (this.defaultUrlParamsProvider) {
             let defaultParams = this.defaultUrlParamsProvider.getUrlParams();
             oper.url += '?' + defaultParams;
         }
+        //GET方式，把参数拼接到url后面
         if (method.toLocaleUpperCase() === "GET" && oper.params) {
-
-        }
-
-        if (oper.params) {
+            
             let addParams = Object.keys(oper.params).map(e => e + '=' + oper.params[e]).join('&');
             if (addParams && oper.url.indexOf('?') == -1) {
                 oper.url += "?";
             }
             oper.url += addParams;
+
         }
+
 
         let fullUrl = url.trim();
         if (fullUrl.indexOf("http") == -1) {
@@ -99,6 +97,7 @@ export class GGHttpClient implements IGGHttpClient {
     get(url: string, data: Object): GGHttpOperation {
         return this.request('GET', url, data);
     }
+
     post(url: string, data: Object): GGHttpOperation {
         return this.request('POST', url, data);
     }
