@@ -3,18 +3,18 @@ import Message from "./model/Message";
 /**
  * 编解码处理器
  */
-export default interface ICodecHandler {
+export default interface CodecHandler {
 
     /**
      * 处理解码
      * @param data 
      */
-    handleDecode(data: ArrayBuffer):Message;
+    handleDecode(buff: ArrayBuffer): Message;
 
     /**
      * 处理编码
      * @param data 
      */
-    handleEncode(data: Message):void;
+    handleEncode(message: Message): void;
 
 }

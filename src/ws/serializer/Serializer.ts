@@ -1,7 +1,7 @@
 /**
  * 序列化器
  */
-export interface ISerializer {
+export default interface Serializer {
 
     /**
      * 序列化
@@ -12,7 +12,8 @@ export interface ISerializer {
     /**
      * 反序列化
      * @param data 需要进行反序列化的字节数组
+     * @param type 反序列化目标类型
      */
-    deserialize(data: Uint8Array): any;
+    deserialize(data: any): any;
 
 }

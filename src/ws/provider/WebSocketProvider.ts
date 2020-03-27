@@ -1,8 +1,8 @@
 /**
  * WebSocket对象提供者接口
  */
-export interface WebSocketProvider {
+export default interface WebSocketProvider {
 
-    getWebSocket():WebSocket;
+    getWebSocket(): WebSocket;
 
 }

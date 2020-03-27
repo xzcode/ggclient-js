@@ -5,13 +5,24 @@
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest --verbose",
     "build": "tsc",
     "pub": "tsc && npm pack && npm publish"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/xzcode/ggclient-js.git"
+  "jest": {
+    "rootDir": "tests",
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
+    },
+    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.tsx?$",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json",
+      "node"
+    ]
   },
   "keywords": [],
   "author": "",
@@ -24,5 +35,14 @@
   },
   "homepage": "https://github.com/xzcode/ggclient-js#readme",
   "devDependencies": {
+    "@types/jest": "^25.1.4",
+    "jest": "^25.2.3",
+    "ts-jest": "^25.2.1",
+    "typescript": "^3.8.3"
+  },
+  "dependencies": {
+    "@typescript-eslint/eslint-plugin": "^2.25.0",
+    "@typescript-eslint/parser": "^2.25.0",
+    "eslint": "^6.8.0"
   }
 }

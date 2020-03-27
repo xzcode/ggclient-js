@@ -1,4 +1,4 @@
-import { ISerializer } from "../serializer/ISerializer";
+import ISerializer from "../serializer/ISerializer";
 import JsonSerializer from "../serializer/JsonSerializer";
 import ICodecHandler from "../codec/ICodecHandler";
 import DefaultCodecHandler from "../codec/impl/DefaultCodecHandler";
