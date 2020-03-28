@@ -5,18 +5,17 @@ import CodecUtil from "../util/CodecUtil";
  * json序列化器
  */
 export default class JsonSerializer implements Serializer {
+    private defaultEmptyArrayBuffer = [];
 
-    private defaultEmptyArrayBuffer = new Uint8Array([]);
-
-    serialize(data: any): Uint8Array {
-        if (!data) return this.defaultEmptyArrayBuffer;
+    serialize(data: any): number[] {
+        if (!data) return [];
         const arr: number[] = CodecUtil.stringToUtf8ByteArr(data);
-        return new Uint8Array([...arr]);
+        return arr;
     }
 
-    deserialize(data: Uint8Array): any {
+    deserialize(data: number[]): any {
         if (!data) return undefined;
-        return JSON.parse(CodecUtil.arraybufferToString(data));
+        return JSON.parse(CodecUtil.byteArrayToString(data));
     }
 
 }

@@ -1,6 +1,6 @@
-import ISerializer from "../serializer/ISerializer";
+import Serializer from "../serializer/Serializer";
 import JsonSerializer from "../serializer/JsonSerializer";
-import ICodecHandler from "../codec/ICodecHandler";
+import CodecHandler from "../codec/CodecHandler";
 import DefaultCodecHandler from "../codec/impl/DefaultCodecHandler";
 
 /**
@@ -8,7 +8,8 @@ import DefaultCodecHandler from "../codec/impl/DefaultCodecHandler";
  */
 export default class GGClientConfig {
 
-    serializer: ISerializer = new JsonSerializer();
-    codecHandler: ICodecHandler = new DefaultCodecHandler(this);
+    serverUrl = 'ws://localhost/websocket';
+    serializer: Serializer = new JsonSerializer();
+    codecHandler: CodecHandler = new DefaultCodecHandler(this);
 
 }

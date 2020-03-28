@@ -25,8 +25,12 @@ export default class CodecUtil {
         return bytes;
     }
 
-    static arraybufferToString(unit8Arr: Uint8Array): string {
-        const encodedString = String.fromCharCode.apply(null, Array.from(unit8Arr));
+    /**
+     * 字节数组转字符串
+     * @param byteArray 字节数组
+     */
+    static byteArrayToString(byteArray: number[]): string {
+        const encodedString = String.fromCharCode.apply(null, byteArray);
         const decodedString = decodeURIComponent(escape((encodedString)));
         return decodedString;
     }

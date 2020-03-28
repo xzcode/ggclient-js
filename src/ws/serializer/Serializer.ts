@@ -7,7 +7,7 @@ export default interface Serializer {
      * 序列化
      * @param data 需要进行序列化的对象
      */
-    serialize(data: any): Uint8Array;
+    serialize(data: any): number[];
 
     /**
      * 反序列化

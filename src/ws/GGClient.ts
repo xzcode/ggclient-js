@@ -1,5 +1,4 @@
-import { WebSocketProvider } from "./provider/WebSocketProvider";
-import { ISerializer } from "./serializer/ISerializer";
+import GGClientConfig from "./config/GGClientConfig";
 
 
 
@@ -8,31 +7,61 @@ import { ISerializer } from "./serializer/ISerializer";
  */
 export class GGClient {
 
-    serverUrl: string = 'ws://localhost/websocket';
-    defaultParams: Object = {};
-    serializer: ISerializer;
-    ws: WebSocket | undefined;
+    config: GGClientConfig;
+    ws?: WebSocket;
 
     /**
      * 
-     * @param serverUrl 服务器地址
-     * @param webSocketProvider WebSocketProvider
-     * @param ISerializer 序列化器
+     * @param config 
      */
-    constructor(serverUrl: string, webSocketProvider: WebSocketProvider, serializer: ISerializer)
-
-    /**
-     * 基础构造器
-     * @param args 参数素组
-     */
-    constructor(...args: any) {
-        this.serverUrl = args[0];
-        this.serializer = args[1]
+    constructor(config: GGClientConfig) {
+        this.config = config;
     }
 
-    connect() {
-        this.ws = new WebSocket(this.serverUrl);
+    /**
+     * 进行连接
+     */
+    connect(): void {
+        if (!this.checkForConnect()) {
+            return;
+        }
+        this.ws = new WebSocket(this.config.serverUrl);
         this.ws.binaryType = "arraybuffer";
+
+        this.ws.onopen = (e: Event) => {
+            
+        }
+        
+        this.ws.onmessage = (e: MessageEvent) => {
+
+        }
+
+        this.ws.onclose = (e: CloseEvent) => {
+
+        }
+
+        this.ws.onerror = (e: Event) => {
+
+        }
+
+    }
+
+    /**
+     * 检查连接条件
+     */
+    private checkForConnect(): boolean {
+        if (this.ws) {
+            if (this.ws.url == this.config.serverUrl) {
+                if (this.ws.readyState === 1) {
+                    return false;
+                }
+            } else {
+                if (this.ws.readyState <= 1) {
+                    this.ws.close();
+                }
+            }
+        }
+        return true;
     }
 
 
