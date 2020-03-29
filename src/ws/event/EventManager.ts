@@ -21,28 +21,28 @@ export default class EventManager {
         group.addListener(listener);
     }
 
-    
-    removeListener(listener: GGEventListener): void {
-
-    }
+    /**
+     * 移除监听
+     * @param eventId 事件id
+     */
+    removeListener(eventId: string): void ;
     /**
      * 移除监听器
      * @param eventId 
      * @param listener 
      */
-    remove(eventId?: string, listener?: GGEventListener): void {
+    removeListener(eventId?: string, listener?: GGEventListener): void {
         if (eventId) {
             this.groups.delete(eventId);
             return;
         }
         if (listener) {
-            let flag = false;
-            this.groups.forEach((v, k) => {
-                if (flag) {
-                    return;
+            for (const g of this.groups) {
+                if(g[1].removeListener(listener)) {
+                    break;
                 }
-                flag = v.removeListener(listener);
-            });
+                
+            }
         }
     }
 
