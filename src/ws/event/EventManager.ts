@@ -46,4 +46,14 @@ export default class EventManager {
         }
     }
 
+    /**
+     * 触发事件
+     * @param eventId 事件id
+     * @param eventData 事件数据
+     */
+    trigger(eventId: string, eventData: EventData): void {
+        const group = this.groups.get(eventId);
+        group && group.trigger(eventData);
+    }
+
 }
