@@ -3,8 +3,8 @@
  */
 export default class GGEvents {
 
-    readonly CONNECTION_OPEN = "ggevent.connection.open";
-    readonly CONNECTION_CLOSE = "ggevent.connection.close";
-    readonly CONNECTION_ERROR = "ggevent.connection.error";
+    static readonly CONNECTION_OPEN = "ggevent.connection.open";
+    static readonly CONNECTION_CLOSE = "ggevent.connection.close";
+    static readonly CONNECTION_ERROR = "ggevent.connection.error";
 
 }

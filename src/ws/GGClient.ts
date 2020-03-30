@@ -1,4 +1,6 @@
 import GGClientConfig from "./config/GGClientConfig";
+import GGEvents from "./event/GGEvents";
+import EventData from "./event/model/EventData";
 
 
 
@@ -27,21 +29,26 @@ export class GGClient {
         }
         this.ws = new WebSocket(this.config.serverUrl);
         this.ws.binaryType = "arraybuffer";
-
-        this.ws.onopen = (e: Event) => {
-            
-        }
+        const eventManager = this.config.eventManager;
         
-        this.ws.onmessage = (e: MessageEvent) => {
-
+        this.ws.onopen = (e: Event): void => {
+            eventManager.trigger(GGEvents.CONNECTION_OPEN, new EventData(e));
         }
 
-        this.ws.onclose = (e: CloseEvent) => {
-
+        this.ws.onmessage = (e: MessageEvent): void => {
+            //获取消息数据
+            const buff = e.data;
+            //进行编解码
+            //处理消息 
+            eventManager.trigger(GGEvents.CONNECTION_OPEN, new EventData(e));
         }
 
-        this.ws.onerror = (e: Event) => {
+        this.ws.onclose = (e: CloseEvent): void => {
+            eventManager.trigger(GGEvents.CONNECTION_CLOSE, new EventData(e));
+        }
 
+        this.ws.onerror = (e: Event): void => {
+            eventManager.trigger(GGEvents.CONNECTION_ERROR, new EventData(e));
         }
 
     }

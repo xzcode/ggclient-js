@@ -37,8 +37,8 @@ export default class EventManager {
             return;
         }
         if (listener) {
-            for (const g of this.groups) {
-                if(g[1].removeListener(listener)) {
+            for (const group of this.groups) {
+                if(group[1].removeListener(listener)) {
                     break;
                 }
                 

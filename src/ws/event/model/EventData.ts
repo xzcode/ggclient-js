@@ -2,15 +2,15 @@
  * 事件数据
  */
 export default class EventData {
-    eventId?: string;
-    data? : unknown;
+    
+    data?: any;
 
     /**
      * 构造器
      * @param eventId 事件id
      */
-    constructor(eventId: string) {
-        this.eventId = eventId;
+    constructor(data?: any) {
+        this.data = data;
     }
 
 }
