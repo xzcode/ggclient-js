@@ -1,8 +1,9 @@
 import GGClientConfig from "./config/GGClientConfig";
-import GGEvents from "./event/GGEvents";
+import GGEvents from "./ws/event/GGWSockEvents";
 import EventData from "./event/model/EventData";
 import GGEventListener from "./event/listener/GGEventListener";
-import WSClient from "./WSClient";
+import WSClient from "./ws/WSockClient";
+import HttpClient from "./http/HttpClient";
 
 
 
@@ -12,7 +13,8 @@ import WSClient from "./WSClient";
 export class GGClient {
 
     config: GGClientConfig;
-    wsClient: WSClient;
+    wsock: WSClient;
+    http: HttpClient;
 
     /**
      * 构造器
@@ -20,7 +22,8 @@ export class GGClient {
      */
     constructor(config: GGClientConfig) {
         this.config = config;
-        this.wsClient = new WSClient(config);
+        this.wsock = new WSClient(config.wsockConfig);
+        this.http = new HttpClient(config.httpClientConfig);
     }
 
     /**

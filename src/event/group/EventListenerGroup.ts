@@ -1,5 +1,5 @@
-import GGEventListener from "../../../event/listener/GGEventListener";
-import EventData from "../../../event/model/EventData";
+import GGEventListener from "../listener/GGEventListener";
+import EventData from "../model/EventData";
 
 /**
  * 事件组

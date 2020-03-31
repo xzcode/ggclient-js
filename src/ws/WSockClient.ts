@@ -1,7 +1,6 @@
-import GGClientConfig from "./config/GGClientConfig";
-import GGEvents from "./event/GGEvents";
-import EventData from "./event/model/EventData";
-import GGEventListener from "./event/listener/GGEventListener";
+import EventData from "../event/model/EventData";
+import WSockConfig from "./config/WSockConfig";
+import GGEvents from "./event/GGWSockEvents";
 
 
 
@@ -10,14 +9,14 @@ import GGEventListener from "./event/listener/GGEventListener";
  */
 export default class WSClient {
 
-    config: GGClientConfig;
+    config: WSockConfig;
     ws?: WebSocket;
 
     /**
      * 构造器
      * @param config 
      */
-    constructor(config: GGClientConfig) {
+    constructor(config: WSockConfig) {
         this.config = config;
     }
 
