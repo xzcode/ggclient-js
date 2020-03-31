@@ -1,5 +1,4 @@
 import CodecHandler from "../CodecHandler";
-import GGClientConfig from "../../../config/GGClientConfig";
 import CodecUtil from "../../util/CodecUtil";
 import Message from "../model/Message";
 import WSockConfig from "../../config/WSockConfig";
@@ -21,6 +20,9 @@ export default class DefaultCodecHandler implements CodecHandler {
      */
     private static readonly ACTION_ID_LEN_BYTES = 1;
 
+    /**
+     * 配置
+     */
     config: WSockConfig;
 
     constructor(config: WSockConfig) {

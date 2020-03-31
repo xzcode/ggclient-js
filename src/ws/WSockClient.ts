@@ -39,8 +39,11 @@ export default class WSClient {
             //获取消息数据
             const buff = e.data;
             //进行编解码
-            //处理消息 
-            eventManager.trigger(GGEvents.CONNECTION_OPEN, new EventData(e));
+            const message = this.config.codecHandler.handleDecode(buff);
+            if(message.actionId) {
+                //处理消息 
+                eventManager.trigger(message.actionId, new EventData(message));
+            }
         }
 
         this.ws.onclose = (e: CloseEvent): void => {
