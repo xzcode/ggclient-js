@@ -1,6 +1,8 @@
 import GGClientConfig from "./config/GGClientConfig";
 import GGEvents from "./event/GGEvents";
 import EventData from "./event/model/EventData";
+import GGEventListener from "./event/listener/GGEventListener";
+import WSClient from "./WSClient";
 
 
 
@@ -10,67 +12,35 @@ import EventData from "./event/model/EventData";
 export class GGClient {
 
     config: GGClientConfig;
-    ws?: WebSocket;
+    wsClient: WSClient;
 
     /**
-     * 
-     * @param config 
+     * 构造器
+     * @param config 配置
      */
     constructor(config: GGClientConfig) {
         this.config = config;
+        this.wsClient = new WSClient(config);
     }
 
     /**
-     * 进行连接
+     * 发射事件
+     * @param eventId 事件id
+     * @param eventData 事件数据
      */
-    connect(): void {
-        if (!this.checkForConnect()) {
-            return;
-        }
-        this.ws = new WebSocket(this.config.serverUrl);
-        this.ws.binaryType = "arraybuffer";
-        const eventManager = this.config.eventManager;
-        
-        this.ws.onopen = (e: Event): void => {
-            eventManager.trigger(GGEvents.CONNECTION_OPEN, new EventData(e));
-        }
-
-        this.ws.onmessage = (e: MessageEvent): void => {
-            //获取消息数据
-            const buff = e.data;
-            //进行编解码
-            //处理消息 
-            eventManager.trigger(GGEvents.CONNECTION_OPEN, new EventData(e));
-        }
-
-        this.ws.onclose = (e: CloseEvent): void => {
-            eventManager.trigger(GGEvents.CONNECTION_CLOSE, new EventData(e));
-        }
-
-        this.ws.onerror = (e: Event): void => {
-            eventManager.trigger(GGEvents.CONNECTION_ERROR, new EventData(e));
-        }
-
+    emit(eventId: string, eventData: EventData): void {
+        this.config.eventManager.trigger(eventId, eventData);
     }
+
 
     /**
-     * 检查连接条件
+     * 添加监听器
+     * @param eventId 事件id
+     * @param listener 监听器
      */
-    private checkForConnect(): boolean {
-        if (this.ws) {
-            if (this.ws.url == this.config.serverUrl) {
-                if (this.ws.readyState === 1) {
-                    return false;
-                }
-            } else {
-                if (this.ws.readyState <= 1) {
-                    this.ws.close();
-                }
-            }
-        }
-        return true;
+    on(eventId: string, listener: GGEventListener): void {
+        this.config.eventManager.addListener(eventId, listener);
     }
-
 
 
 }

@@ -1,4 +1,4 @@
-import IGGHttpClient from './IGGHttpClient'
+import IGGHttpClient from './HttpClient'
 import IHeaderProvider from './header/IHeaderProvider'
 import DefaultHeaderProvider from './header/DefaultHeaderProvider';
 import IXMLHttpRequestProvider from './xhr/IXMLHttpRequestProvider';
@@ -17,7 +17,7 @@ export class GGHttpClient implements IGGHttpClient {
     private timeout: number = 30 * 1000;
 
     //默认服务端url
-    private serverUrl: string = 'http://localhost';
+    private serverUrl = 'http://localhost';
 
     //XMLHttpRequest提供者
     private xhrProvider: IXMLHttpRequestProvider = new DefaultXMLHttpRequestProvider();
@@ -42,7 +42,7 @@ export class GGHttpClient implements IGGHttpClient {
     }
 
     request(method: string, url: string, options?: any): GGHttpOperation {
-        let oper: GGHttpOperation = new GGHttpOperation();
+        const oper = new GGHttpOperation();
         oper.method = method;
         oper.url = url;
         if (options) {
@@ -50,7 +50,7 @@ export class GGHttpClient implements IGGHttpClient {
             oper.body = options.body;
         }
 
-        let xhr = this.xhrProvider.getXMLHttpRequest();
+        const xhr = this.xhrProvider.getXMLHttpRequest();
         oper.xhr = xhr;
 
         this.headerProvider?.provideHeaders(xhr);
@@ -64,13 +64,13 @@ export class GGHttpClient implements IGGHttpClient {
         };
         //如果存在默认url参数提供者，就把默认参数拼接到url上
         if (this.defaultUrlParamsProvider) {
-            let defaultParams = this.defaultUrlParamsProvider.getUrlParams();
+            const defaultParams = this.defaultUrlParamsProvider.getUrlParams();
             oper.url += '?' + defaultParams;
         }
         //GET方式，把参数拼接到url后面
         if (method.toLocaleUpperCase() === "GET" && oper.params) {
             
-            let addParams = Object.keys(oper.params).map(e => e + '=' + oper.params[e]).join('&');
+            const addParams = Object.keys(oper.params).map(e => e + '=' + oper.params[e]).join('&');
             if (addParams && oper.url.indexOf('?') == -1) {
                 oper.url += "?";
             }
@@ -94,11 +94,11 @@ export class GGHttpClient implements IGGHttpClient {
         return oper;
     }
 
-    get(url: string, data: Object): GGHttpOperation {
+    get(url: string, data: any): GGHttpOperation {
         return this.request('GET', url, data);
     }
 
-    post(url: string, data: Object): GGHttpOperation {
+    post(url: string, data: any): GGHttpOperation {
         return this.request('POST', url, data);
     }
 
