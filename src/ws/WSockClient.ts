@@ -1,6 +1,6 @@
 import EventData from "../event/model/EventData";
 import WSockConfig from "./config/WSockConfig";
-import GGEvents from "./event/GGWSockEvents";
+import GGWSockEvents from "./event/GGWSockEvents";
 
 
 
@@ -32,7 +32,7 @@ export default class WSClient {
         const eventManager = this.config.eventManager;
         
         this.ws.onopen = (e: Event): void => {
-            eventManager.trigger(GGEvents.CONNECTION_OPEN, new EventData(e));
+            eventManager.trigger(GGWSockEvents.CONNECTION_OPEN, new EventData(e));
         }
 
         this.ws.onmessage = (e: MessageEvent): void => {
@@ -47,11 +47,11 @@ export default class WSClient {
         }
 
         this.ws.onclose = (e: CloseEvent): void => {
-            eventManager.trigger(GGEvents.CONNECTION_CLOSE, new EventData(e));
+            eventManager.trigger(GGWSockEvents.CONNECTION_CLOSE, new EventData(e));
         }
 
         this.ws.onerror = (e: Event): void => {
-            eventManager.trigger(GGEvents.CONNECTION_ERROR, new EventData(e));
+            eventManager.trigger(GGWSockEvents.CONNECTION_ERROR, new EventData(e));
         }
 
     }

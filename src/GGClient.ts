@@ -1,5 +1,4 @@
 import GGClientConfig from "./config/GGClientConfig";
-import GGEvents from "./ws/event/GGWSockEvents";
 import EventData from "./event/model/EventData";
 import GGEventListener from "./event/listener/GGEventListener";
 import WSClient from "./ws/WSockClient";

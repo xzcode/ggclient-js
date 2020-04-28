@@ -1,9 +1,9 @@
-import IHeaderProvider from "./IHeaderProvider";
+import HeaderProvider from "./HeaderProvider";
 
 /**
  * 默认请求头提供者
  */
-export default class DefaultHeaderProvider implements IHeaderProvider {
+export default class DefaultHeaderProvider implements HeaderProvider {
 
     
     provideHeaders(xhr: XMLHttpRequest): void {
