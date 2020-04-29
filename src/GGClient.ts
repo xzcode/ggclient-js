@@ -9,7 +9,7 @@ import HttpClient from "./http/HttpClient";
 /**
  * GGClient客户端
  */
-export class GGClient {
+export default class GGClient {
 
     config: GGClientConfig;
     wsock: WSClient;

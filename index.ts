@@ -1,3 +1,8 @@
-export * from './src/GGClient';
-export * from './src/http/HttpClient';
+import GGClient from "./src/GGClient";
+import HttpClient from "./src/http/HttpClient";
+
+export default {
+    GGClient,
+    HttpClient
+}
 

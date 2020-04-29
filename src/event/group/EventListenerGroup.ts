@@ -44,7 +44,7 @@ export default class EventListenerGroup {
      * 触发监听器
      * @param eventData 事件数据
      */
-    trigger(eventData: EventData) {
+    trigger(eventData: EventData): void {
         this.listeners.forEach(listener => {
             listener(eventData);
         });

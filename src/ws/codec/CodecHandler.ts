@@ -15,6 +15,6 @@ export default interface CodecHandler {
      * 处理编码
      * @param data 
      */
-    handleEncode(message: Message): void;
+    handleEncode(message: Message): ArrayBuffer;
 
 }

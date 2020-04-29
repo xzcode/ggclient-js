@@ -1,6 +1,7 @@
 import EventData from "../event/model/EventData";
 import WSockConfig from "./config/WSockConfig";
 import GGWSockEvents from "./event/GGWSockEvents";
+import Message from "./codec/model/Message";
 
 
 
@@ -54,6 +55,21 @@ export default class WSClient {
             eventManager.trigger(GGWSockEvents.CONNECTION_ERROR, new EventData(e));
         }
 
+    }
+
+    /**
+     * 发送消息
+     * @param actionId 指令
+     * @param data 数据体
+     */
+    send(actionId?: string, data?: any): void {
+        if(actionId && actionId.length > 0) {
+            //序列化并发送数据
+            const buf = this.config.codecHandler.handleEncode(new Message(actionId, data));
+            this.ws?.send(buf);
+        }else{
+            console.error("Parameter 'actionId' must not be empty!")
+        }
     }
 
     /**

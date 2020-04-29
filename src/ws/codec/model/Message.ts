@@ -4,7 +4,6 @@
 export default class Message {
 
     actionId?: string;//指令标识
-    meta?: any;//元数据
     data?: any;//数据体
 
     constructor();
@@ -16,10 +15,9 @@ export default class Message {
      * @param data 元数据
      * @param meta 数据体
      */
-    constructor(actionId?: string, data?: any, meta?: any) {
+    constructor(actionId?: string, data?: any) {
         this.actionId = actionId;
         this.data = data;
-        this.meta = meta;
     };
 
 }
