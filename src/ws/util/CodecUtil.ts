@@ -29,7 +29,7 @@ export default class CodecUtil {
      * 字节数组转字符串
      * @param byteArray 字节数组
      */
-    static byteArrayToString(byteArray: number[]): string {
+    static byteArrayToString(byteArray: any): string {
         const encodedString = String.fromCharCode.apply(null, byteArray);
         const decodedString = decodeURIComponent(escape((encodedString)));
         return decodedString;

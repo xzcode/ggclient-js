@@ -14,6 +14,6 @@ export default interface Serializer {
      * @param data 需要进行反序列化的字节数组
      * @param type 反序列化目标类型
      */
-    deserialize(data: any): any;
+    deserialize(data: Uint8Array): any;
 
 }

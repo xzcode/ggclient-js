@@ -9,11 +9,11 @@ export default class JsonSerializer implements Serializer {
 
     serialize(data: any): number[] {
         if (!data) return [];
-        const arr: number[] = CodecUtil.stringToUtf8ByteArr(data);
+        const arr: number[] = CodecUtil.stringToUtf8ByteArr(JSON.stringify(data));
         return arr;
     }
 
-    deserialize(data: number[]): any {
+    deserialize(data: Uint8Array): any {
         if (!data) return undefined;
         return JSON.parse(CodecUtil.byteArrayToString(data));
     }
