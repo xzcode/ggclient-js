@@ -8,13 +8,18 @@ import WSockConfig from "../../config/WSockConfig";
  */
 export default class DefaultCodecHandler implements CodecHandler {
 
-    //|1b|tag|data|
+    //|2b|1b|tag|data|
 
 
     /**
      * action id 长度标识字节数
      */
     private static readonly ACTION_ID_LEN_BYTES = 1;
+
+     /**
+     * 保留内容标识字节数
+     */
+    private static readonly RESERVE_LEN_BYTES = 2;
 
     /**
      * 配置
@@ -29,6 +34,9 @@ export default class DefaultCodecHandler implements CodecHandler {
     handleDecode(buff: ArrayBuffer): Message {
         const message = new Message();
         let readIndex = 0;
+
+        //reserve
+        new DataView(buff.slice(readIndex, (readIndex += DefaultCodecHandler.RESERVE_LEN_BYTES)));
 
         //actionid
         const actionIdDv = new DataView(buff.slice(readIndex, (readIndex += DefaultCodecHandler.ACTION_ID_LEN_BYTES)));
@@ -48,6 +56,10 @@ export default class DefaultCodecHandler implements CodecHandler {
     handleEncode(message: Message): ArrayBuffer {
 
         const buff: number[] = [];
+
+        //reserve
+        buff.push(0, 0);
+
         //actionid
         if( message.actionId) {
             buff.push(message.actionId.length);
